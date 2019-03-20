@@ -498,11 +498,6 @@ if [[ ${enable_intel_packages} -eq 1 ]];then
      yum -y install ohpc-intel-impi-parallel-libs
 fi
 
-# -------------------------------------------------------------
-# Allow for optional sleep to wait for provisioning to complete
-# -------------------------------------------------------------
-sleep ${provision_wait}
-
 # ------------------------------------
 # Resource Manager Startup (Section 5)
 # ------------------------------------
@@ -510,11 +505,12 @@ systemctl enable munge
 systemctl enable slurmctld
 systemctl start munge
 systemctl start slurmctld
-pdsh -w $compute_prefix[1-$num_computes] systemctl start slurmd
 
-# Optionally, generate nhc config
-pdsh -w c1 "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
-useradd -m test
+# Add a few test users
+useradd -m test1
+useradd -m test2
+useradd -m test3
 wwsh file resync passwd shadow group
-sleep 2
-pdsh -w $compute_prefix[1-$num_computes] /warewulf/bin/wwgetfiles 
+
+# Do this after provisioning nodes.
+#pdsh -w $compute_prefix[1-$num_computes] systemctl start slurmd
