@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
           '--boot2', 'none',
           '--boot3', 'none',
           '--boot4', 'none',
-          '--macaddress1', '00:1a:2b:11:11:11'
+          '--macaddress1', '22:1a:2b:11:11:11'
         ]
       end
     end
@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
           '--boot2', 'none',
           '--boot3', 'none',
           '--boot4', 'none',
-          '--macaddress1', '00:1a:2b:22:22:22'
+          '--macaddress1', '22:1a:2b:22:22:22'
         ]
       end
     end
