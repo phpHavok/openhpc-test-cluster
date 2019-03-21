@@ -13,8 +13,9 @@ Vagrant.configure("2") do |config|
       sms.vm.provision "shell", inline: "echo sms.localdomain > /etc/hostname"
       sms.vm.provision "shell", inline: "yum -y install http://build.openhpc.community/OpenHPC:/1.3/CentOS_7/x86_64/ohpc-release-1.3-1.el7.x86_64.rpm"
       sms.vm.provision "shell", inline: "yum -y install docs-ohpc"
-      sms.vm.provision "shell", inline: "sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux"
       sms.vm.provision "shell", inline: "/vagrant/recipe.sh"
+      # Disable SELINUX.
+      sms.vm.provision "shell", inline: "setenforce 0", run: "always"
     end
 
     config.vm.define "c1", autostart: false do |c1|
