@@ -11,14 +11,33 @@ Install the following software.
 - [VirtualBox Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
 - [Vagrant](https://www.vagrantup.com/)
 
-## Running
+## Building and Running
 
-To build and run the SMS, run `vagrant up`. Once built, you can run `vagrant
-ssh` to SSH into the SMS. Run `vagrant up c1` and `vagrant up c2` to bring up
-the two included compute nodes. They will be automatically provisioned by the
-SMS. Run `vagrant halt` to stop the VMs and `vagrant destroy` to clean up.
+To build a cluster of `$N` nodes, where `1 <= $N <= 10`, run:
+
+    make NCOMPUTES=$N
+
+A directory named `cluster` will be built. Change into the `cluster` directory
+before running subsequent commands.
+
+To start the SMS, run:
+
+    vagrant up
+
+Provisioning the first time will take approximately ten minutes. Once the SMS is
+running, you can SSH into it:
+
+    vagrant ssh
+
+Compute nodes are named `c1`, `c2`, ..., `c$N`. For any given compute node, say
+`c$i`, you can start it with:
+
+    vagrant up c$i
 
 When booting compute nodes, Vagrant will be unable to communicate with them as
 they only have an internal network. Ignore the error message Vagrant spits out
-after 10 seconds of booting. Don't worry, the compute nodes are running, and
-`vagrant status` will show this.
+after 10 seconds of booting. The SMS will provision the compute nodes, which
+will take approximately two minutes.
+
+The ordinary Vagrant `halt`, `destroy`, and `status` commands may be useful as
+well.
