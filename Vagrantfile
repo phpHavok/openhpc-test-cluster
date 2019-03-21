@@ -35,6 +35,7 @@ Vagrant.configure("2") do |config|
           '--macaddress1', '221a2b111111'
         ]
       end
+      c1.vm.boot_timeout = 10
     end
 
     config.vm.define "c2", autostart: false do |c2|
@@ -54,6 +55,7 @@ Vagrant.configure("2") do |config|
           '--macaddress1', '221a2b222222'
         ]
       end
+      c2.vm.boot_timeout = 10
     end
 end
 
