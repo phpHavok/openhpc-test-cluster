@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "c1", autostart: false do |c1|
       c1.vm.provider "virtualbox" do |vboxc1|
-        vboxc1.memory = 1024
+        vboxc1.memory = 2048
         vboxc1.cpus = 1
         # Enable if you need to debug PXE.
         #vboxc1.gui = 'true'
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "c2", autostart: false do |c2|
       c2.vm.provider "virtualbox" do |vboxc2|
-        vboxc2.memory = 1024
+        vboxc2.memory = 2048
         vboxc2.cpus = 1
         # Enable if you need to debug PXE.
         #vboxc2.gui = 'true'
