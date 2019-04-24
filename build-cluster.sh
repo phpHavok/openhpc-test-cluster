@@ -48,3 +48,4 @@ cat Vagrantfile.footer.tmpl >> cluster/Vagrantfile
 cp slurm.conf cluster/slurm.conf
 cp slurmdbd.conf cluster/slurmdbd.conf
 cp slurmdbd.sql cluster/slurmdbd.sql
+cp slurm-setup.sh cluster/slurm-setup.sh
