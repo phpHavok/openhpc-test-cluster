@@ -45,3 +45,6 @@ echo "$COMPUTE_DEFS" >> cluster/input.local
 cp Vagrantfile.header.tmpl cluster/Vagrantfile
 echo "$VAGRANT_DEFS" >> cluster/Vagrantfile
 cat Vagrantfile.footer.tmpl >> cluster/Vagrantfile
+cp slurm.conf cluster/slurm.conf
+cp slurmdbd.conf cluster/slurmdbd.conf
+cp slurmdbd.sql cluster/slurmdbd.sql

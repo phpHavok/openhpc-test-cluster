@@ -498,19 +498,31 @@ if [[ ${enable_intel_packages} -eq 1 ]];then
      yum -y install ohpc-intel-impi-parallel-libs
 fi
 
-# ------------------------------------
-# Resource Manager Startup (Section 5)
-# ------------------------------------
-systemctl enable munge
-systemctl enable slurmctld
-systemctl start munge
-systemctl start slurmctld
-
 # Add a few test users
 useradd -m test1
 useradd -m test2
 useradd -m test3
 wwsh file resync passwd shadow group
+
+# ------------------------------------
+# Resource Manager Startup (Section 5)
+# ------------------------------------
+cp /vagrant/slurm.conf /etc/slurm/slurm.conf
+cp /vagrant/slurmdbd.conf /etc/slurm/slurmdbd.conf
+systemctl enable munge
+systemctl enable slurmctld
+systemctl enable slurmdbd
+mysql < /vagrant/slurmdbd.sql
+systemctl start munge
+systemctl start slurmdbd
+sacctmgr -i add cluster linux
+sacctmgr -i add account projects
+sacctmgr -i add account proj1 parent=projects
+sacctmgr -i add account proj2 parent=projects
+sacctmgr -i add user test1 account=proj1
+sacctmgr -i add user test2 account=proj2
+sacctmgr -i add user test3 account=proj2
+systemctl start slurmctld
 
 # Do this after provisioning nodes.
 #pdsh -w $compute_prefix[1-$num_computes] systemctl start slurmd
