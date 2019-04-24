@@ -32,7 +32,7 @@ running, you can SSH into it:
 If you are doing Slurm development, you can run the following script to start up
 Slurm and establish some default accounting settings.
 
-    /vagrant/setup-slurm.sh
+    /vagrant/slurm-setup.sh
 
 Compute nodes are named `c1`, `c2`, ..., `c$N`. For any given compute node, say
 `c$i`, you can start it with:
