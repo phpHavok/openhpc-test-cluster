@@ -511,6 +511,7 @@ cp /vagrant/slurm.conf /etc/slurm/slurm.conf
 cp /vagrant/slurmdbd.conf /etc/slurm/slurmdbd.conf
 cp /vagrant/cgroup.conf /etc/slurm/cgroup.conf
 cp /vagrant/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
+wwsh file sync slurm.conf
 wwsh file import /etc/slurm/cgroup.conf
 wwsh file import /etc/slurm/cgroup_allowed_devices_file.conf
 wwsh -y provision set "${compute_regex}" --fileadd=cgroup.conf,cgroup_allowed_devices_file.conf
