@@ -513,6 +513,7 @@ cp /vagrant/cgroup.conf /etc/slurm/cgroup.conf
 cp /vagrant/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
 wwsh file import /etc/slurm/cgroup.conf
 wwsh file import /etc/slurm/cgroup_allowed_devices_file.conf
+wwsh -y provision set "${compute_regex}" --fileadd=cgroup.conf,cgroup_allowed_devices_file.conf
 systemctl enable munge
 systemctl enable slurmctld
 systemctl enable slurmdbd
