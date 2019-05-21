@@ -49,3 +49,5 @@ cp slurm.conf cluster/slurm.conf
 cp slurmdbd.conf cluster/slurmdbd.conf
 cp slurmdbd.sql cluster/slurmdbd.sql
 cp slurm-setup.sh cluster/slurm-setup.sh
+cp cgroup.conf cluster/cgroup.conf
+cp cgroup_allowed_devices_file.conf cluster/cgroup_allowed_devices_file.conf
