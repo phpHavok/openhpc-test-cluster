@@ -6,12 +6,6 @@ if [ -z "$NCOMPUTES" ] || [ "$NCOMPUTES" -lt 1 ] || [ "$NCOMPUTES" -gt 10 ]; the
     exit 1
 fi
 
-PXEBOOT_ISO="$2"
-if [ ! -f "$PXEBOOT_ISO" ]; then
-    echo "You need to point to a PXEBOOT ISO from https://ipxe.org/download"
-    exit 1
-fi
-
 COMPUTE_DEFS=""
 VAGRANT_DEFS=""
 for ((i=1;i<=NCOMPUTES;i++)); do
