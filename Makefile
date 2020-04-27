@@ -1,5 +1,5 @@
 NCOMPUTES ?= 2
-PXEBOOT_ISO=
+PXEBOOT_ISO := ipxe.iso
 
 $(PXEBOOT_ISO):
     wget -O "$@" http://boot.ipxe.org/ipxe.iso
