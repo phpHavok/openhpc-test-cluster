@@ -1,7 +1,10 @@
 NCOMPUTES ?= 2
 PXEBOOT_ISO=
 
-cluster:
+$(PXEBOOT_ISO):
+    wget -O "$@" http://boot.ipxe.org/ipxe.iso
+    
+cluster: $(PXEBOOT_ISO)
 	@echo "Building a cluster with $(NCOMPUTES) compute nodes..."
 	@mkdir cluster
 	@./build-cluster.sh "$(NCOMPUTES)" "$(PXEBOOT_ISO)"
