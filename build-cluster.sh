@@ -6,6 +6,12 @@ if [ -z "$NCOMPUTES" ] || [ "$NCOMPUTES" -lt 1 ] || [ "$NCOMPUTES" -gt 10 ]; the
     exit 1
 fi
 
+PXEBOOT_ISO="$2"
+if [ ! -f "$PXEBOOT_ISO" ]; then
+    echo "You must supply a PXEBOOT ISO that exists."
+    exit 1
+fi
+
 COMPUTE_DEFS=""
 VAGRANT_DEFS=""
 for ((i=1;i<=NCOMPUTES;i++)); do
