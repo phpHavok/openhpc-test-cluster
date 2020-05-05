@@ -66,3 +66,5 @@ cp slurmdbd.sql cluster/slurmdbd.sql
 cp slurm-setup.sh cluster/slurm-setup.sh
 cp cgroup.conf cluster/cgroup.conf
 cp cgroup_allowed_devices_file.conf cluster/cgroup_allowed_devices_file.conf
+
+cp "$PXEBOOT_ISO" "cluster/$PXEBOOT_ISO"
