@@ -6,6 +6,12 @@ if [ -z "$NCOMPUTES" ] || [ "$NCOMPUTES" -lt 1 ] || [ "$NCOMPUTES" -gt 10 ]; the
     exit 1
 fi
 
+PXEBOOT_ISO="$2"
+if [ ! -f "$PXEBOOT_ISO" ]; then
+    echo "You must supply a PXEBOOT ISO that exists."
+    exit 1
+fi
+
 COMPUTE_DEFS=""
 VAGRANT_DEFS=""
 for ((i=1;i<=NCOMPUTES;i++)); do
@@ -26,11 +32,20 @@ EOF`
           'modifyvm', :id,
           '--nic1', 'intnet',
           '--intnet1', 'provisioning',
-          '--boot1', 'net',
+          '--boot1', 'dvd',
           '--boot2', 'none',
           '--boot3', 'none',
           '--boot4', 'none',
           '--macaddress1', '221a2b0000$((i-1))$((i-1))'
+        ]
+
+        vboxc$i.customize [
+          "storageattach", :id,
+          "--storagectl", "IDE",
+          "--port", "0",
+          "--device", "0",
+          "--type", "dvddrive",
+          "--medium", "${PXEBOOT_ISO}"
         ]
       end
       c$i.vm.boot_timeout = 10
@@ -51,3 +66,5 @@ cp slurmdbd.sql cluster/slurmdbd.sql
 cp slurm-setup.sh cluster/slurm-setup.sh
 cp cgroup.conf cluster/cgroup.conf
 cp cgroup_allowed_devices_file.conf cluster/cgroup_allowed_devices_file.conf
+
+cp "$PXEBOOT_ISO" "cluster/$PXEBOOT_ISO"
